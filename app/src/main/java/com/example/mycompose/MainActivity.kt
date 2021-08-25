@@ -3,36 +3,43 @@ package com.example.mycompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
 import com.example.mycompose.ui.theme.MyComposeTheme
+import com.example.navigation.AuthenticationDirections
+import com.example.navigation.DashboardDirections
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MyComposeTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                val navController = rememberNavController()
+                NavHost(
+                    navController,
+                    startDestination = AuthenticationDirections.root.destination
+                ) {
+                    navigation(
+                        startDestination = AuthenticationDirections.authentication.destination,
+                        route = AuthenticationDirections.root.destination
+                    ) {
+                        composable(AuthenticationDirections.authentication.destination) {
+                            Text("Authentication")
+                        }
+                    }
+                    navigation(
+                        startDestination = AuthenticationDirections.dashboard.destination,
+                        route = DashboardDirections.root.destination
+                    ) {
+                        composable(AuthenticationDirections.dashboard.destination) {
+                            Text("Dashboard")
+                        }
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MyComposeTheme {
-        Greeting("Android")
     }
 }
