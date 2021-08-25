@@ -10,3 +10,4 @@ rootProject.name = "MyCompose"
 include ':app'
 include ':navigation'
 include ':authentication'
+include ':dashboard'

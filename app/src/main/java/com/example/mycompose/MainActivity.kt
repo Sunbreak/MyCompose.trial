@@ -3,12 +3,12 @@ package com.example.mycompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.Text
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.example.authentication.Authentication
+import com.example.dashboard.Dashboard
 import com.example.mycompose.ui.theme.MyComposeTheme
 import com.example.navigation.AuthenticationDirections
 import com.example.navigation.DashboardDirections
@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
                         route = DashboardDirections.root.destination
                     ) {
                         composable(AuthenticationDirections.dashboard.destination) {
-                            Text("Dashboard")
+                            Dashboard()
                         }
                     }
                 }
