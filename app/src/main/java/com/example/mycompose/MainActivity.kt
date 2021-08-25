@@ -3,6 +3,7 @@ package com.example.mycompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -12,7 +13,9 @@ import com.example.dashboard.Dashboard
 import com.example.mycompose.ui.theme.MyComposeTheme
 import com.example.navigation.AuthenticationDirections
 import com.example.navigation.DashboardDirections
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +31,13 @@ class MainActivity : ComponentActivity() {
                         route = AuthenticationDirections.root.destination
                     ) {
                         composable(AuthenticationDirections.authentication.destination) {
-                            Authentication()
+                            Authentication(
+                                hiltViewModel(
+                                    navController.getBackStackEntry(
+                                        AuthenticationDirections.authentication.destination
+                                    )
+                                )
+                            )
                         }
                     }
                     navigation(
@@ -36,7 +45,13 @@ class MainActivity : ComponentActivity() {
                         route = DashboardDirections.root.destination
                     ) {
                         composable(AuthenticationDirections.dashboard.destination) {
-                            Dashboard()
+                            Dashboard(
+                                hiltViewModel(
+                                    navController.getBackStackEntry(
+                                        AuthenticationDirections.dashboard.destination
+                                    )
+                                )
+                            )
                         }
                     }
                 }
