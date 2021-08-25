@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import com.example.authentication.Authentication
 import com.example.mycompose.ui.theme.MyComposeTheme
 import com.example.navigation.AuthenticationDirections
 import com.example.navigation.DashboardDirections
@@ -27,7 +28,7 @@ class MainActivity : ComponentActivity() {
                         route = AuthenticationDirections.root.destination
                     ) {
                         composable(AuthenticationDirections.authentication.destination) {
-                            Text("Authentication")
+                            Authentication()
                         }
                     }
                     navigation(
